@@ -1,0 +1,66 @@
+.table {
+  width: 100%;
+  overflow-x: scroll;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+
+  thead {
+    background-color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #009baa;
+  }
+
+  td {
+    padding: 1rem;
+
+    &:first-child {
+      padding-left: 2rem;
+    }
+    &:last-child {
+      padding-right: 2rem;
+    }
+  }
+
+  tr:nth-child(even) {
+    background-color: rgb(0, 0, 0, 0.03);
+  }
+
+  tbody tr:hover {
+    background-color: rgb(0, 0, 0, 0.06);
+  }
+
+  &__cell {
+    &--date {
+      opacity: 0.8;
+      font-style: italic;
+    }
+    &--value {
+      text-align: right;
+    }
+    &--account {
+      display: flex;
+      flex-direction: column;
+
+      &__holder {
+        font-size: 1rem;
+        font-weight: 400;
+        opacity: 0.6;
+      }
+      &__bank {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+.tx-tag {
+  background-color: rgb(113, 80, 190);
+  color: white;
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-variant: small-caps;
+  font-weight: 500;
+}

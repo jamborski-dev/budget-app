@@ -1,0 +1,26 @@
+.btn {
+  --color: #0963de;
+  font-family: inherit;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  color: white;
+  background-color: var(--color);
+  border: 2px solid var(--color);
+  cursor: pointer;
+
+  transition: {
+    property: color, background-color, border-color;
+    duration: 0.1s;
+  }
+
+  &:hover {
+    background-color: transparent;
+    border-color: var(--color);
+    color: var(--color);
+  }
+
+  &.-over-dark:hover {
+    color: white;
+  }
+}

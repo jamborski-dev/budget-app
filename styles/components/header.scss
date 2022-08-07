@@ -1,0 +1,21 @@
+.block__header {
+  grid-area: block_header;
+  display: flex;
+  background-color: rgb(50, 50, 50);
+  color: rgb(256, 256, 256);
+  padding: 1.5rem;
+}
+
+.global-nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 2rem;
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+}

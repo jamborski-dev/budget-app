@@ -1,0 +1,71 @@
+.block__content {
+  grid-area: block_content;
+  overflow: hidden;
+
+  .content {
+    height: 100%;
+    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    overflow-y: scroll;
+    position: relative;
+  }
+
+  .content-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+    border-bottom: 1px solid #ececec;
+    background-color: #ececec;
+
+    &__meta {
+      padding-left: 2rem;
+    }
+
+    .account-tabs {
+      margin-left: auto;
+
+      &__list {
+        display: flex;
+        list-style-type: none;
+      }
+
+      &__list-item {
+        padding: 0.6rem 3.5rem 0.6rem 3rem;
+        color: white;
+        margin-right: -2rem;
+        border-top-left-radius: 30px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        transform: translateX(0);
+        text-align: right;
+        min-width: 170px;
+
+        &:last-child {
+          padding-right: 4rem;
+        }
+
+        &:hover {
+          transform: translateX(-0.5rem);
+        }
+      }
+    }
+
+    .account-tab {
+      &__name {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      &__bank {
+        font-size: 0.8rem;
+        font-weight: 300;
+        opacity: 0.7;
+      }
+      &__current {
+        font-size: 1rem;
+        font-weight: 300;
+      }
+    }
+  }
+}

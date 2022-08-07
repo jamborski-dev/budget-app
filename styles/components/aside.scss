@@ -1,0 +1,50 @@
+.block__sidebar {
+  grid-area: block_sidebar;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+  background-color: #009baa;
+  color: #ffffff;
+}
+
+.side-nav {
+  &--primary {
+    position: relative;
+  }
+  &--secondary {
+    margin-top: auto;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0.5rem;
+  }
+
+  &__list-item {
+    font-size: 1.2rem;
+    display: grid;
+    place-content: center;
+    padding: 0.5rem;
+    border-radius: 1000px;
+    cursor: pointer;
+
+    transition: {
+      property: color, background-color;
+      duration: 0.1s;
+    }
+
+    &:hover {
+      background-color: white;
+      color: #009baa;
+    }
+
+    & .-heart {
+      transform: translateY(2px);
+    }
+    & .-tag {
+      transform: translate(1px, 1px);
+    }
+  }
+}
