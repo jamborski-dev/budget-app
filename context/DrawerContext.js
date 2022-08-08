@@ -4,13 +4,18 @@ export const DrawerContext = createContext({})
 
 export const DrawerContextProvider = ({ children }) => {
   const [isOpen, setOpen] = useState(false)
+  const [selectedTab, setSelectedTab] = useState("expense")
+
+  const selectTab = tab => setSelectedTab(tab)
 
   const context = {
     state: {
-      isOpen
+      isOpen,
+      selectedTab
     },
     actions: {
-      setOpen
+      setOpen,
+      selectTab
     }
   }
 

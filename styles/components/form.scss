@@ -17,6 +17,13 @@ fieldset {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  &--with-prefix {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
 }
 
 .form-label {
@@ -24,27 +31,67 @@ fieldset {
   opacity: 0.7;
 }
 
-.form-input {
+.form-input,
+.form-input--with-prefix,
+.form-group--with-prefix {
   border: none;
   width: 100%;
-  padding: 0.7rem 0;
   background-color: transparent;
+  font-size: 1rem;
+}
+
+.form-input,
+.form-group--with-prefix {
+  padding: 0.7rem 0;
+}
+
+.form-input,
+.form-group--with-prefix {
   border-bottom: 2px solid rgb(208, 208, 208);
   transition: {
     property: border-color;
     duration: 0.2s;
   }
+}
 
-  &:focus {
-    outline: none;
-    border-bottom: 2px solid var(--color-action);
+.form-input:focus,
+.form-input--with-prefix:focus,
+.form-group--with-prefix:focus-within {
+  outline: none;
+}
+
+.form-input:focus,
+.form-group--with-prefix:focus-within {
+  border-bottom: 2px solid var(--color-action);
+}
+
+.input-prefix {
+  opacity: 0.7;
+}
+
+.tx-meta {
+  &__account {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    strong {
+      color: var(--color-action);
+    }
   }
 }
 
 .tx-summary {
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
+  margin: 2rem 0;
 
   &__heading {
     font-size: 0.8rem;
@@ -56,5 +103,17 @@ fieldset {
     font-size: 1.4rem;
     font-weight: 500;
     margin-bottom: 1rem;
+    color: #444444;
+
+    &.-higher {
+      color: #179d2c;
+    }
+    &.-lower {
+      color: maroon;
+
+      &:before {
+        content: "-";
+      }
+    }
   }
 }

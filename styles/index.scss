@@ -38,3 +38,9 @@
   height: 100%;
   position: relative;
 }
+
+.loading {
+  display: grid;
+  place-content: center;
+  opacity: 0.8;
+}

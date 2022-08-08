@@ -3,7 +3,7 @@ import { Select } from "./Select"
 import { useDataContext } from "../hooks/useDataContext"
 import { useDrawerContext } from "../hooks/useDrawerContext"
 
-export const DrawerFieldsExpenses = () => {
+export const DrawerFieldsIncome = () => {
   const {
     state: { tags, selectedAccount }
   } = useDataContext()
@@ -18,7 +18,7 @@ export const DrawerFieldsExpenses = () => {
 
   return (
     <form className="drawer-form" onSubmit={handleOnSubmit}>
-      <h3 className="form-heading">New outgoing transaction</h3>
+      <h3 className="form-heading">New incoming transaction</h3>
       <div className="tx-meta__account">
         <span>Target Account</span>
         <strong>{selectedAccount.account_holder}</strong>

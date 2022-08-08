@@ -1,11 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useDrawerContext } from "../hooks/useDrawerContext"
+import { DrawerFieldsIncome } from "./DrawerFieldsIncome"
 import { DrawerFieldsExpenses } from "./DrawerFieldsExpenses"
 
 export const Drawer = () => {
   const {
-    state: { isOpen },
-    actions: { setOpen }
+    state: { isOpen, selectedTab },
+    actions: { setOpen, selectTab }
   } = useDrawerContext()
 
   return (
@@ -32,18 +33,26 @@ export const Drawer = () => {
         animate={isOpen ? "open" : "closed"}
       >
         <header className="content-drawer__header">
-          <div className="content-drawer__tab">
+          <div
+            className={`content-drawer__tab ${selectedTab === "income" ? "-active" : ""}`}
+            onClick={() => selectTab("income")}
+          >
             <label className="content-drawer__tab-label">Income</label>
           </div>
-          <div className="content-drawer__tab -active">
+          <div
+            className={`content-drawer__tab ${selectedTab === "expense" ? "-active" : ""}`}
+            onClick={() => selectTab("expense")}
+          >
             <label className="content-drawer__tab-label">Expense</label>
           </div>
         </header>
         <div className="content-drawer__content">
-          <DrawerFieldsExpenses />
-          <button className="btn content-drawer__close" onClick={() => setOpen(false)}>
+          {selectedTab === "income" && <DrawerFieldsIncome />}
+          {selectedTab === "expense" && <DrawerFieldsExpenses />}
+
+          {/* <button className="btn content-drawer__close" onClick={() => setOpen(false)}>
             Close
-          </button>
+          </button> */}
         </div>
       </motion.div>
     </>

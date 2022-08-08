@@ -8,6 +8,7 @@ export const DataContextProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([])
   const [accounts, setAccounts] = useState([])
   const [tags, setTags] = useState([])
+  const [selectedAccount, setSelectedAccount] = useState({})
 
   useEffect(() => {
     setLoading(true)
@@ -20,18 +21,14 @@ export const DataContextProvider = ({ children }) => {
         setTransactions(data)
       })
       .catch(err => setErrors(err))
-  }, [])
 
-  useEffect(() => {
     fetch("/api/accounts")
       .then(res => res.json())
       .then(data => {
         setAccounts(data)
       })
       .catch(err => setErrors(err))
-  }, [])
 
-  useEffect(() => {
     fetch("/api/tags")
       .then(res => res.json())
       .then(data => {
@@ -46,16 +43,28 @@ export const DataContextProvider = ({ children }) => {
     setLoading(false)
   }, [tags, transactions, accounts])
 
+  // Select first account onLoad
+  useEffect(() => {
+    if (!accounts.length) return
+
+    setSelectedAccount(accounts.find(item => item.id === 0))
+    console.log("acc", selectedAccount)
+  }, [accounts])
+
+  const selectAccount = _id => setSelectedAccount(accounts.find(item => item.id === _id))
+
   const context = {
     state: {
+      isLoading,
       transactions,
       accounts,
-      tags,
-      isLoading
+      selectedAccount,
+      tags
     },
     actions: {
       setTransactions,
       setAccounts,
+      selectAccount,
       setTags
     }
   }
