@@ -1,5 +1,5 @@
 import { CurrencyInput, Input } from "./Input"
-import { Select } from "./Select"
+import { Select, TxRepeat } from "./Select"
 import { useDataContext } from "../hooks/useDataContext"
 import { useDrawerContext } from "../hooks/useDrawerContext"
 
@@ -28,6 +28,9 @@ export const DrawerFieldsIncome = () => {
       <fieldset className="fieldset">
         <Input name="Title" type="text" placeholder="Shopping..." />
         <CurrencyInput name="Amount" currency="£" />
+
+        <TxRepeat />
+
         {/* TODO: switch select to icon grid once icon reference is resolved */}
         <Select name="Tag">
           <option value="0">- no tag -</option>

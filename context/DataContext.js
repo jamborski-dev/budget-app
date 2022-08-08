@@ -48,7 +48,6 @@ export const DataContextProvider = ({ children }) => {
     if (!accounts.length) return
 
     setSelectedAccount(accounts.find(item => item.id === 0))
-    console.log("acc", selectedAccount)
   }, [accounts])
 
   const selectAccount = _id => setSelectedAccount(accounts.find(item => item.id === _id))

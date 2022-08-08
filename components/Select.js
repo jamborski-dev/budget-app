@@ -15,3 +15,15 @@ export const Select = ({ name, inputClass, labelClass, wrapperClass, children, .
     </div>
   )
 }
+
+export const TxRepeat = () => {
+  return (
+    <Select name="Repeat">
+      <option value="0">never</option>
+      <option value="1">every day</option>
+      <option value="7">every week</option>
+      <option value="30">every month</option>
+      <option value="365">every year</option>
+    </Select>
+  )
+}
