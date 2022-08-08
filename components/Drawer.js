@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useDrawerContext } from "../hooks/useDrawerContext"
+import { DrawerFieldsExpenses } from "./DrawerFieldsExpenses"
 
 export const Drawer = () => {
   const {
@@ -16,6 +17,7 @@ export const Drawer = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="content-drawer__overlay"
+            onClick={() => setOpen(false)}
           ></motion.div>
         )}
       </AnimatePresence>
@@ -38,7 +40,7 @@ export const Drawer = () => {
           </div>
         </header>
         <div className="content-drawer__content">
-          Set of relevant inputs here
+          <DrawerFieldsExpenses />
           <button className="btn content-drawer__close" onClick={() => setOpen(false)}>
             Close
           </button>

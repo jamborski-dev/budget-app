@@ -12,7 +12,7 @@ export const Header = () => {
       </div>
       <nav className="global-nav">
         <div className="breadcrumb">Forecast</div>
-        <ul className="nav-list nav-list--secondary">
+        {/* <ul className="nav-list nav-list--secondary">
           <li className="nav-list-item" onClick={() => setOpen(true)}>
             <button className="btn -over-dark">Open Drawer</button>
           </li>
@@ -22,7 +22,7 @@ export const Header = () => {
           <li className="nav-list-item">Menu Item 2</li>
           <li className="nav-list-item">Menu Item 3</li>
           <li className="nav-list-item">Menu Item 4</li>
-        </ul>
+        </ul> */}
       </nav>
     </div>
   )

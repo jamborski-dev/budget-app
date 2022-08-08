@@ -1,5 +1,5 @@
 .btn {
-  --color: #0963de;
+  --color: var(--color-action);
   font-family: inherit;
   font-weight: 400;
   border-radius: 4px;
@@ -22,5 +22,19 @@
 
   &.-over-dark:hover {
     color: white;
+  }
+
+  &.-cancel {
+    --color: var(--color-abort-action);
+  }
+
+  &-group {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+
+    & .btn {
+      width: 100%;
+    }
   }
 }
