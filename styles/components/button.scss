@@ -14,10 +14,14 @@
     duration: 0.1s;
   }
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: transparent;
     border-color: var(--color);
     color: var(--color);
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 
   &.-over-dark:hover {

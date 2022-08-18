@@ -9,6 +9,8 @@ export const TransactionsHeader = () => {
     state: { accounts, selectedAccount }
   } = useDataContext()
 
+  if (!accounts) return null
+
   const date = new Date()
   const today = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
 
@@ -41,17 +43,24 @@ const AccountTab = ({ account, isActive }) => {
     actions: { selectAccount }
   } = useDataContext()
 
+  const { id, color, accountHolders, bankName, currencySymbol, currentBalance } = account
+
+  const renderAccountHolderNames = _accountHolders =>
+    _accountHolders.map(
+      (holder, index) => `${holder.name}${index < accountHolders.length - 1 ? " | " : ""}`
+    )
+
   return (
     <li
-      className={`account-tabs__list-item ${isActive === account.id ? "-active" : ""}`}
-      style={{ "--tab-color": account.account_color }}
-      onClick={() => selectAccount(account.id)}
+      className={`account-tabs__list-item ${isActive === id ? "-active" : ""}`}
+      style={{ "--tab-color": color }}
+      onClick={() => selectAccount(id)}
     >
-      <div className="account-tab__name">{account.account_holder}</div>
-      <div className="account-tab__bank">{account.bank}</div>
+      <div className="account-tab__name">{renderAccountHolderNames(accountHolders)}</div>
+      <div className="account-tab__bank">{bankName}</div>
       <div className="account-tab__current">
-        {account.currency_symbol}
-        {account.current_amount}
+        {currencySymbol}
+        {currentBalance}
       </div>
     </li>
   )

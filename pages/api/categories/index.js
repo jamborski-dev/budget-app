@@ -5,7 +5,7 @@ import { FaCreditCard, FaCar, FaBabyCarriage } from "react-icons/fa"
 import { SiInstacart, SiHomeassistantcommunitystore } from "react-icons/si"
 
 export default function handler(req, res) {
-  const TAGS = [
+  const CATEGORIES = [
     // prettier-ignore
     { id: 0,  label: "self",        color: 'rgb(113, 80, 190)', icon: <BsHeartFill /> },
     // prettier-ignore
@@ -24,5 +24,5 @@ export default function handler(req, res) {
     { id: 7,  label: "baby",        color: 'rgb(190, 168, 80)', icon: <FaBabyCarriage /> }
   ]
 
-  res.status(200).json(TAGS)
+  res.status(200).json(CATEGORIES)
 }

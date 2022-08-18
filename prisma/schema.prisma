@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  name     String
+  accounts Account[]
+}
+
+enum CurrencySymbolPosition {
+  PREFIX
+  SUFFIX
+}
+
+enum TransactionType {
+  SINGLE
+  REPEAT
+}
+
+enum TransactionDirection {
+  INCOMING
+  OUTGOING
+}
+
+enum TransactionStatus {
+  PAID
+  NOT_PAID
+}
+
+model TransactionRepeatPeriod {
+  id          Int           @id @default(autoincrement())
+  label       String        @unique
+  Transaction Transaction[]
+}
+
+// Many-to-Many relation
+// https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations#implicit-many-to-many-relations
+
+model Account {
+  id                     Int                    @id @default(autoincrement())
+  bankName               String
+  currentBalance         Float                  @default(0.00)
+  transactions           Transaction[]
+  accountHolders         User[] // multiple users when joint account
+  currencyCode           String                 @default("GBP")
+  currencySymbol         String                 @default("£")
+  currencySymbolPosition CurrencySymbolPosition @default(PREFIX)
+  color                  String?
+}
+
+model Category {
+  id          Int           @id @default(autoincrement())
+  label       String        @unique
+  color       String
+  Transaction Transaction[]
+}
+
+model Transaction {
+  id                        Int                      @id @default(autoincrement())
+  date                      DateTime                 @default(now())
+  title                     String
+  account                   Account                  @relation(fields: [accountId], references: [id])
+  accountId                 Int
+  amount                    Float
+  balanceBefore             Float
+  balanceAfter              Float
+  direction                 TransactionDirection
+  status                    TransactionStatus
+  type                      TransactionType
+  repeatId                  TransactionRepeatPeriod? @relation(fields: [transactionRepeatPeriodId], references: [id])
+  category                  Category                 @relation(fields: [categoryId], references: [id])
+  categoryId                Int
+  transactionRepeatPeriodId Int?
+}

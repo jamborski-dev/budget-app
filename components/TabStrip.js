@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const Radio = ({ name, options = [] }) => {
+export const TabStrip = ({ name, label, options = [] }) => {
   const [checked, setChecked] = useState("")
 
   const handleRadio = value => setChecked(value)
@@ -8,7 +8,7 @@ export const Radio = ({ name, options = [] }) => {
   return (
     <div className={`form-group`}>
       <label htmlFor={name} className={`form-label`}>
-        {name}
+        {label}
       </label>
       <div id={name} className="radio-group">
         <label

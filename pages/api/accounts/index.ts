@@ -1,4 +1,8 @@
-export default function handler(req, res) {
+import { PrismaClient } from "@prisma/client"
+import { NextApiRequest, NextApiResponse } from "next"
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const prisma = new PrismaClient()
   const ACCOUNTS_DATA = [
     {
       id: 0,
@@ -47,5 +51,8 @@ export default function handler(req, res) {
     }
   ]
 
-  res.status(200).json(ACCOUNTS_DATA)
+  if (req.method === "GET") {
+    const accounts = await prisma.account.findMany({ include: { accountHolders: true } })
+    res.status(200).json(accounts)
+  }
 }

@@ -1,11 +1,11 @@
 import { CurrencyInput, Input } from "./Input"
-import { Select, TxRepeat } from "./Select"
+import { Select, TabStrip } from "./Select"
 import { useDataContext } from "../hooks/useDataContext"
 import { useDrawerContext } from "../hooks/useDrawerContext"
 
 export const DrawerFieldsIncome = () => {
   const {
-    state: { tags, selectedAccount }
+    state: { categories, selectedAccount }
   } = useDataContext()
   const {
     actions: { setOpen }
@@ -29,12 +29,12 @@ export const DrawerFieldsIncome = () => {
         <Input name="Title" type="text" placeholder="Shopping..." />
         <CurrencyInput name="Amount" currency="£" />
 
-        <TxRepeat />
+        <TabStrip />
 
         {/* TODO: switch select to icon grid once icon reference is resolved */}
         <Select name="Tag">
           <option value="0">- no tag -</option>
-          {tags.map((tag, index) => (
+          {categories.map((tag, index) => (
             <option key={index} value={tag.label}>
               {tag.label}
             </option>

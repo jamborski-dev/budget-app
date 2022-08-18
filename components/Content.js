@@ -7,8 +7,10 @@ export const Content = () => {
   const {
     state: { isLoading }
   } = useDataContext()
-  if (isLoading)
+  if (isLoading) {
     return <div className="loading">Please wait while loading transactions data...</div>
+  }
+
   return (
     <div className="grid-block block__content">
       <div className="content">

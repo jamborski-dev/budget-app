@@ -26,3 +26,10 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.-value {
+  // prettier-ignore
+  &-incoming { color: rgb(37, 195, 47); }
+  // prettier-ignore
+  &-outgoing { color: rgb(205, 46, 46); }
+}

@@ -47,8 +47,9 @@ export const Drawer = () => {
           </div>
         </header>
         <div className="content-drawer__content">
-          {selectedTab === "income" && <DrawerFieldsIncome />}
-          {selectedTab === "expense" && <DrawerFieldsExpenses />}
+          {/* {selectedTab === "income" && <DrawerFieldsIncome />} */}
+          {/* {selectedTab === "expense" && <DrawerFieldsExpenses />} */}
+          <DrawerFieldsExpenses />
 
           {/* <button className="btn content-drawer__close" onClick={() => setOpen(false)}>
             Close
