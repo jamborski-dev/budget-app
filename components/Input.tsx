@@ -30,3 +30,7 @@ export const CurrencyInput = ({ name, label, currency, ...rest }) => {
     </div>
   )
 }
+
+export const InputsRow = ({ children }) => {
+  return <div className={`form-group -row`}>{children}</div>
+}

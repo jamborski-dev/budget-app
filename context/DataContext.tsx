@@ -1,67 +1,24 @@
-import { Account } from "@prisma/client"
-import { useState, useEffect, createContext, Dispatch, SetStateAction } from "react"
+import { useState, useEffect, createContext } from "react"
+import { fetchApi } from "../lib/utils"
 
-interface IDataContext {
-  state: TDataContextState
-  actions: TDataContextActions
-}
-
-// TODO: update types to resamble Prisma schema
-interface TDataContextState {
-  isLoading: boolean
-  transactions: Array<any>
-  accounts: Array<any>
-  selectedAccount: Account
-  categories: Array<any>
-}
-
-type AccountMock = {
-  id: number
-  account_holder: string
-  bank: string
-  currency_code: string
-  currency_symbol: string
-  current_amount: number
-  account_color: string
-}
-
-type Account = {
-  id: number
-  bankName: string
-  account_holder: string
-  currentBalance: number
-  transactions: Object[]
-  accountHolders: Object[]
-  currencyCode: string
-  currencySymbol: string
-  currencySymbolPosition: string
-  color: string
-}
-
-interface TDataContextActions {
-  setTransactions: Dispatch<SetStateAction<any[]>>
-  setAccounts: Dispatch<SetStateAction<any[]>>
-  setCategories: Dispatch<SetStateAction<any[]>>
-  selectAccount: (_id: number) => void
-}
-
-export type TContextProps = {
-  children?: React.ReactNode
-}
+import type { IDataContext, TContextProps } from "./DataContext.types"
+import type { TAccount } from "../types/app.types"
 
 export const DataContext = createContext<IDataContext>({
   state: {
     isLoading: false,
     transactions: [],
+    standingOrders: [],
     accounts: [],
-    selectedAccount: undefined,
-    categories: []
+    categories: [],
+    selectedAccount: undefined
   },
   actions: {
-    setTransactions: () => {},
-    setAccounts: () => {},
     selectAccount: () => {},
-    setCategories: () => {}
+    fetchTransactions: () => {},
+    fetchCategories: () => {},
+    fetchStandingOrders: () => {},
+    fetchAccounts: () => {}
   }
 })
 
@@ -69,66 +26,55 @@ export const DataContextProvider = ({ children }: TContextProps) => {
   const [isLoading, setLoading] = useState(false)
   const [errors, setErrors] = useState(false)
   const [transactions, setTransactions] = useState([])
+  const [standingOrders, setStandingOrders] = useState([])
   const [accounts, setAccounts] = useState([])
   const [categories, setCategories] = useState([])
-  const [selectedAccount, setSelectedAccount] = useState<Account>()
+  const [selectedAccount, setSelectedAccount] = useState<TAccount>()
 
   useEffect(() => {
     setLoading(true)
   }, [])
 
   useEffect(() => {
-    fetch("/api/transactions")
-      .then(res => res.json())
-      .then(data => {
-        setTransactions(data)
-      })
-      .catch(err => setErrors(err))
+    fetchTransactions()
+    fetchAccounts()
+    fetchCategories()
+    fetchStandingOrders()
 
-    fetch("/api/accounts")
-      .then(res => res.json())
-      .then(data => {
-        setAccounts(data)
-      })
-      .catch(err => setErrors(err))
-
-    fetch("/api/categories")
-      .then(res => res.json())
-      .then(data => {
-        setCategories(data)
-      })
-      .catch(err => setErrors(err))
+    setLoading(false)
   }, [])
 
-  useEffect(() => {
-    if (!categories.length || !transactions.length || !accounts.length) return
-
-    console.log(accounts)
-    setLoading(false)
-  }, [categories, transactions, accounts])
-
-  // Select first account onLoad
+  // Select first account on first load
   useEffect(() => {
     if (!accounts.length) return
+    if (selectedAccount) return
 
     setSelectedAccount(accounts.find(item => item.id === 1))
   }, [accounts])
 
   const selectAccount = (_id: number) => setSelectedAccount(accounts.find(item => item.id === _id))
 
+  const fetchTransactions = async () => fetchApi("/api/transactions", setTransactions, setErrors)
+  const fetchAccounts = async () => fetchApi("/api/accounts", setAccounts, setErrors)
+  const fetchCategories = async () => fetchApi("/api/categories", setCategories, setErrors)
+  const fetchStandingOrders = async () =>
+    fetchApi("/api/standing-orders", setStandingOrders, setErrors)
+
   const context = {
     state: {
       isLoading,
       transactions,
+      standingOrders,
       accounts,
       selectedAccount,
       categories
     },
     actions: {
-      setTransactions,
-      setAccounts,
       selectAccount,
-      setCategories
+      fetchTransactions,
+      fetchAccounts,
+      fetchCategories,
+      fetchStandingOrders
     }
   }
 

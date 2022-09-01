@@ -8,6 +8,10 @@ fieldset {
   border: none;
 }
 
+.form {
+  max-width: 500px;
+}
+
 .form-heading {
   font-weight: 500;
   color: grey;
@@ -17,12 +21,25 @@ fieldset {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  column-gap: 1rem;
 
   &--with-prefix {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
+  }
+
+  &.-row {
+    flex-direction: row;
+
+    .btn {
+      margin-bottom: 1rem;
+      align-self: end;
+      justify-self: center;
+    }
   }
 }
 
@@ -83,6 +100,13 @@ fieldset {
     display: flex;
     flex-direction: column;
 
+    &-heading {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
     span {
       font-size: 0.8rem;
       opacity: 0.7;
@@ -90,8 +114,10 @@ fieldset {
       margin-bottom: 0.2rem;
     }
 
+    // TODO: use --account-color theme for all interactive elements in a drawer
     strong {
       color: var(--color-action);
+      color: var(--account-color);
     }
   }
 }
@@ -119,10 +145,6 @@ fieldset {
     }
     &.-lower {
       color: maroon;
-
-      &:before {
-        content: "-";
-      }
     }
   }
 }
@@ -168,5 +190,17 @@ fieldset {
 
   .form-radio {
     display: none;
+  }
+}
+
+.tx-form__notice {
+  font-size: 0.8rem;
+  margin-block: 1rem;
+
+  &.-error {
+    color: maroon;
+  }
+  &.-info {
+    opacity: 0.7;
   }
 }

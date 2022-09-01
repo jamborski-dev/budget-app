@@ -1,12 +1,3 @@
-type CustomSelectProps = {
-  label: string
-  inputClass: string
-  labelClass: string
-  wrapperClass: string
-  children: any
-  rest: HTMLSelectElement
-}
-
 export const Select = ({
   name,
   label = "",
@@ -17,7 +8,7 @@ export const Select = ({
   ...rest
 }) => {
   return (
-    <div className={`input-group ${wrapperClass ? wrapperClass : ""}`}>
+    <div className={`form-group ${wrapperClass ? wrapperClass : ""}`}>
       <label htmlFor={name} className={`form-label ${labelClass ? labelClass : ""}`}>
         {label}
       </label>
@@ -36,7 +27,6 @@ export const Select = ({
 export const TxRepeat = ({ label, name, ...rest }) => {
   return (
     <Select label={label} name={name} {...rest}>
-      <option value="0">never</option>
       <option value="1">every day</option>
       <option value="7">every week</option>
       <option value="30">every month</option>

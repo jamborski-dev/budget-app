@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useDrawerContext } from "../hooks/useDrawerContext"
-import { DrawerFieldsIncome } from "./DrawerFieldsIncome"
 import { DrawerFieldsExpenses } from "./DrawerFieldsExpenses"
 
 export const Drawer = () => {
@@ -47,8 +46,6 @@ export const Drawer = () => {
           </div>
         </header>
         <div className="content-drawer__content">
-          {/* {selectedTab === "income" && <DrawerFieldsIncome />} */}
-          {/* {selectedTab === "expense" && <DrawerFieldsExpenses />} */}
           <DrawerFieldsExpenses />
 
           {/* <button className="btn content-drawer__close" onClick={() => setOpen(false)}>

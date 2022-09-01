@@ -1,4 +1,4 @@
-const { PrismaClient } = require("@prisma/client")
+import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 async function main() {
@@ -61,13 +61,13 @@ async function main() {
   })
 
   // prettier-ignore
-  const repeatDay = await prisma.transactionRepeatPeriod.upsert({ where: { label: "every day" }, update: {}, create: { label: "every day" } })
+  const repeatDay = await prisma.repeatPeriod.upsert({ where: { label: "every day" }, update: {}, create: { label: "every day", value: 1 } })
   // prettier-ignore
-  const repeatWeek = await prisma.transactionRepeatPeriod.upsert({ where: { label: "every week" }, update: {}, create: { label: "every week" } })
+  const repeatWeek = await prisma.repeatPeriod.upsert({ where: { label: "every week" }, update: {}, create: { label: "every week", value: 7 } })
   // prettier-ignore
-  const repeatMonth = await prisma.transactionRepeatPeriod.upsert({ where: { label: "every month" }, update: {}, create: { label: "every month" } })
+  const repeatMonth = await prisma.repeatPeriod.upsert({ where: { label: "every month" }, update: {}, create: { label: "every month", value: 30 } })
   // prettier-ignore
-  const repeatYear = await prisma.transactionRepeatPeriod.upsert({ where: { label: "every year" }, update: {}, create: { label: "every year" } })
+  const repeatYear = await prisma.repeatPeriod.upsert({ where: { label: "every year" }, update: {}, create: { label: "every year", value: 365 } })
 
   // prettier-ignore
   const category1 = await prisma.category.upsert({ where: { label: "self" }, update: {},        create: { label: "self",        color: "rgb(113, 80, 190)" } })
@@ -86,6 +86,81 @@ async function main() {
   // prettier-ignore
   const category8 = await prisma.category.upsert({ where: { label: "baby" }, update: {},        create: { label: "baby",        color: "rgb(190, 168, 80)" } })
 
+  const standing1 = await prisma.standingOrder.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      id: 1,
+      title: "Rent",
+      amount: 850.0,
+      accountId: 1,
+      startDate: "2020-02-01T12:00:00.648Z",
+      endDate: null,
+      day: 1,
+      repeatPeriodValue: 30
+    }
+  })
+
+  const standing2 = await prisma.standingOrder.upsert({
+    where: { id: 2 },
+    update: {},
+    create: {
+      id: 2,
+      title: "Github",
+      amount: 3.99,
+      accountId: 1,
+      startDate: "2020-05-01T12:00:00.648Z",
+      endDate: null,
+      day: 8,
+      repeatPeriodValue: 30
+    }
+  })
+
+  const standing3 = await prisma.standingOrder.upsert({
+    where: { id: 3 },
+    update: {},
+    create: {
+      id: 3,
+      title: "Three Mobile",
+      amount: 84.0,
+      accountId: 1,
+      startDate: "2020-05-01T12:00:00.648Z",
+      endDate: "2024-04-14T12:00:00.648Z",
+      day: 31,
+      repeatPeriodValue: 30
+    }
+  })
+
+  const standing4 = await prisma.standingOrder.upsert({
+    where: { id: 4 },
+    update: {},
+    create: {
+      id: 4,
+      title: "Testing",
+      amount: 205.0,
+      accountId: 2,
+      startDate: "2020-05-01T12:00:00.648Z",
+      endDate: "2024-04-14T12:00:00.648Z",
+      day: 14,
+      repeatPeriodValue: 30
+    }
+  })
+
+  const standing5 = await prisma.standingOrder.upsert({
+    where: { id: 5 },
+    update: {},
+    create: {
+      id: 5,
+      title: "Some more testing",
+      amount: 19.99,
+      accountId: 2,
+      startDate: "2020-05-01T12:00:00.648Z",
+      endDate: "2024-04-14T12:00:00.648Z",
+      day: 18,
+      repeatPeriodValue: 30
+    }
+  })
+
   console.log({
     user1,
     user2,
@@ -94,6 +169,11 @@ async function main() {
     repeatWeek,
     repeatMonth,
     repeatYear,
+    standing1,
+    standing2,
+    standing3,
+    standing4,
+    standing5,
     category1,
     category2,
     category3,

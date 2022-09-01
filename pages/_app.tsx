@@ -4,11 +4,15 @@ import { DrawerContextProvider } from "../context/DrawerContext"
 import "../styles/globals.css"
 import "../styles/index.scss"
 
+import { Layout } from "../components/Layout"
+
 function MyApp({ Component, pageProps }) {
   return (
     <DataContextProvider>
       <DrawerContextProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </DrawerContextProvider>
     </DataContextProvider>
   )

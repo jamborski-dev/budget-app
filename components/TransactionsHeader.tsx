@@ -1,5 +1,6 @@
 import { useDrawerContext } from "../hooks/useDrawerContext"
 import { useDataContext } from "../hooks/useDataContext"
+import { AccountTab } from "./AccountTab"
 
 export const TransactionsHeader = () => {
   const {
@@ -9,7 +10,7 @@ export const TransactionsHeader = () => {
     state: { accounts, selectedAccount }
   } = useDataContext()
 
-  if (!accounts) return null
+  if (!accounts || !selectedAccount) return null
 
   const date = new Date()
   const today = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
@@ -29,39 +30,13 @@ export const TransactionsHeader = () => {
       </div>
       <nav className="account-tabs">
         <ul className="account-tabs__list">
-          {accounts.map((account, i) => (
-            <AccountTab key={i} account={account} isActive={selectedAccount.id} />
-          ))}
+          {accounts
+            .sort((a, b) => a.id - b.id)
+            .map((account, i) => (
+              <AccountTab key={i} account={account} isActive={selectedAccount.id} />
+            ))}
         </ul>
       </nav>
     </header>
-  )
-}
-
-const AccountTab = ({ account, isActive }) => {
-  const {
-    actions: { selectAccount }
-  } = useDataContext()
-
-  const { id, color, accountHolders, bankName, currencySymbol, currentBalance } = account
-
-  const renderAccountHolderNames = _accountHolders =>
-    _accountHolders.map(
-      (holder, index) => `${holder.name}${index < accountHolders.length - 1 ? " | " : ""}`
-    )
-
-  return (
-    <li
-      className={`account-tabs__list-item ${isActive === id ? "-active" : ""}`}
-      style={{ "--tab-color": color }}
-      onClick={() => selectAccount(id)}
-    >
-      <div className="account-tab__name">{renderAccountHolderNames(accountHolders)}</div>
-      <div className="account-tab__bank">{bankName}</div>
-      <div className="account-tab__current">
-        {currencySymbol}
-        {currentBalance}
-      </div>
-    </li>
   )
 }

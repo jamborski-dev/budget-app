@@ -21,6 +21,10 @@
 
 .icon {
   color: inherit;
+
+  rect {
+    stroke: inherit;
+  }
 }
 
 .grid-block {

@@ -4,6 +4,7 @@
   border-collapse: collapse;
   font-size: 0.8rem;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+  table-layout: fixed;
 
   thead {
     background-color: white;
@@ -64,4 +65,36 @@
   border-radius: 20px;
   font-variant: small-caps;
   font-weight: 500;
+}
+
+.standing-orders {
+  &__grid {
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__table-wrapper {
+    .table td:first-child {
+      padding-left: 1rem;
+    }
+    .table td:last-child {
+      padding-right: 1rem;
+    }
+  }
+
+  &__table-heading {
+    margin-bottom: 1rem;
+  }
+
+  &__account-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin: 0;
+    }
+  }
 }

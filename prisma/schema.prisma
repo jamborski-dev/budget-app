@@ -22,11 +22,6 @@ enum CurrencySymbolPosition {
   SUFFIX
 }
 
-enum TransactionType {
-  SINGLE
-  REPEAT
-}
-
 enum TransactionDirection {
   INCOMING
   OUTGOING
@@ -37,10 +32,11 @@ enum TransactionStatus {
   NOT_PAID
 }
 
-model TransactionRepeatPeriod {
-  id          Int           @id @default(autoincrement())
-  label       String        @unique
-  Transaction Transaction[]
+model RepeatPeriod {
+  id            Int             @id @default(autoincrement())
+  label         String          @unique
+  value         Int             @unique
+  StandingOrder StandingOrder[]
 }
 
 // Many-to-Many relation
@@ -51,6 +47,7 @@ model Account {
   bankName               String
   currentBalance         Float                  @default(0.00)
   transactions           Transaction[]
+  StandingOrders         StandingOrder[]
   accountHolders         User[] // multiple users when joint account
   currencyCode           String                 @default("GBP")
   currencySymbol         String                 @default("£")
@@ -66,19 +63,29 @@ model Category {
 }
 
 model Transaction {
-  id                        Int                      @id @default(autoincrement())
-  date                      DateTime                 @default(now())
-  title                     String
-  account                   Account                  @relation(fields: [accountId], references: [id])
-  accountId                 Int
-  amount                    Float
-  balanceBefore             Float
-  balanceAfter              Float
-  direction                 TransactionDirection
-  status                    TransactionStatus
-  type                      TransactionType
-  repeatId                  TransactionRepeatPeriod? @relation(fields: [transactionRepeatPeriodId], references: [id])
-  category                  Category                 @relation(fields: [categoryId], references: [id])
-  categoryId                Int
-  transactionRepeatPeriodId Int?
+  id            Int                  @id @default(autoincrement())
+  date          DateTime             @default(now())
+  title         String
+  account       Account              @relation(fields: [accountId], references: [id])
+  accountId     Int
+  amount        Float
+  balanceBefore Float
+  balanceAfter  Float
+  direction     TransactionDirection
+  status        TransactionStatus
+  category      Category             @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+}
+
+model StandingOrder {
+  id                Int          @id @default(autoincrement())
+  title             String
+  amount            Float
+  account           Account      @relation(fields: [accountId], references: [id])
+  accountId         Int
+  startDate         DateTime
+  endDate           DateTime?
+  day               Int
+  repeatValue       RepeatPeriod @relation(fields: [repeatPeriodValue], references: [value])
+  repeatPeriodValue Int
 }
