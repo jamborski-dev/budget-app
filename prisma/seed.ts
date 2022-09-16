@@ -1,14 +1,18 @@
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
+// TODO: add budget ID to associate current user with his accounts history
+
 async function main() {
   const user1 = await prisma.user.upsert({
     where: { email: "daszewskaz@gmail.com" },
     update: {},
     create: {
       id: 0,
-      name: "Zuza",
+      displayName: "Zuza",
       email: "daszewskaz@gmail.com",
+      username: "daszewskaz",
+      password: "root",
       accounts: {
         create: [
           {
@@ -28,8 +32,10 @@ async function main() {
     update: {},
     create: {
       id: 1,
-      name: "Rob",
+      displayName: "Rob",
       email: "rsjamborski@gmail.com",
+      username: "rsjamborski",
+      password: "root",
       accounts: {
         create: [
           {
@@ -161,6 +167,44 @@ async function main() {
     }
   })
 
+  const avg1 = await prisma.average.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      id: 1,
+      title: "Groceries",
+      value: 100.0,
+      day: 5,
+      repeatPeriodValue: 7,
+      categoryId: 2
+    }
+  })
+
+  const avg2 = await prisma.average.upsert({
+    where: { id: 2 },
+    update: {},
+    create: {
+      id: 2,
+      title: "Fuel",
+      value: 40.0,
+      day: 1,
+      repeatPeriodValue: 7,
+      categoryId: 5
+    }
+  })
+
+  const avg3 = await prisma.average.upsert({
+    where: { id: 3 },
+    update: {},
+    create: {
+      id: 3,
+      title: "Dog",
+      value: 30.0,
+      day: 15,
+      repeatPeriodValue: 30
+    }
+  })
+
   console.log({
     user1,
     user2,
@@ -181,7 +225,10 @@ async function main() {
     category5,
     category6,
     category7,
-    category8
+    category8,
+    avg1,
+    avg2,
+    avg3
   })
 }
 

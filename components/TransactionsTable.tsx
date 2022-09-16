@@ -23,7 +23,7 @@ export const TransactionsTable = () => {
           */}
           <td className="table__cell--date">{format(new Date(date), "ccc do MMM ''yy")}</td>
           <td className="table__cell--account">
-            <span className="table__cell--account__holder">{accountHolders[0].name}</span>
+            <span className="table__cell--account__holder">{accountHolders[0].displayName}</span>
             <span className="table__cell--account__bank">{bankName}</span>
           </td>
           <td className="table__cell--title">{title}</td>

@@ -17,7 +17,7 @@ export const fetchApi = async (
 // renderAccountHolderNames: (_accountHolders: Object[]) => string[]
 export const renderAccountHolderNames = (_accountHolders: TUser[]) =>
   _accountHolders.map(
-    (holder, index) => `${holder.name}${index < _accountHolders.length - 1 ? " | " : ""}`
+    (holder, index) => `${holder.displayName}${index < _accountHolders.length - 1 ? " | " : ""}`
   )
 
 export const getAccount = (_id: number, accounts: TAccount[]): TAccount =>

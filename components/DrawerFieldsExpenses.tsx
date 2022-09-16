@@ -5,8 +5,9 @@ import { useDrawerContext } from "../hooks/useDrawerContext"
 import { renderAccountHolderNames } from "../lib/utils"
 
 import { CurrencyInput, Input } from "./Input"
-import { Select, TxRepeat } from "./Select"
+import { Select } from "./Select"
 import { TabStrip } from "./TabStrip"
+import { TxRepeatGroup } from "./TxRepeat"
 
 export const DrawerFieldsExpenses = () => {
   const [APILoading, setAPILoading] = useState(false)
@@ -41,7 +42,7 @@ export const DrawerFieldsExpenses = () => {
   const formik = useFormik({
     initialValues: {
       tx_title: "",
-      tx_amount: null,
+      tx_amount: 0.0,
       tx_repeat: "",
       tx_category: "",
       tx_type: txType
@@ -141,11 +142,11 @@ export const DrawerFieldsExpenses = () => {
           checkedValue={formik.values.tx_type}
         />
         {formik.values.tx_type === "REPEAT" && (
-          <TxRepeat
+          <TxRepeatGroup
+            id="tx_repeat"
             name="tx_repeat"
             label="Transaction repeat period"
-            onChange={formik.handleChange}
-            value={formik.values.tx_repeat}
+            formik={formik}
           />
         )}
 
@@ -156,7 +157,7 @@ export const DrawerFieldsExpenses = () => {
           onChange={formik.handleChange}
           value={formik.values.tx_category}
         >
-          <option value="0">- no tag -</option>
+          <option value="0">-</option>
           {categories.map((category, index) => (
             <option key={index} value={category.id}>
               {category.label}

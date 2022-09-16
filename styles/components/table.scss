@@ -55,6 +55,17 @@
       }
     }
   }
+
+  &__btns {
+    .btn-group {
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+    }
+  }
+
+  tr:hover .btn-group {
+    opacity: 1;
+  }
 }
 
 .tx-tag {
@@ -90,7 +101,7 @@
   &__account-meta {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
     margin-bottom: 1rem;
 
     h2 {

@@ -23,7 +23,7 @@ export const Sidebar = () => {
 
       <ul className="side-nav__list side-nav--secondary">
         <NavItem label="Settings" route="/settings" Icon={GoSettings} />
-        <NavItem label="Account" route="/" Icon={FaUserNinja} />
+        <NavItem label="Account" route="/login" Icon={FaUserNinja} />
       </ul>
     </aside>
   )

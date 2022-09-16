@@ -11,10 +11,12 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  email    String    @unique
-  name     String
-  accounts Account[]
+  id          Int       @id @default(autoincrement())
+  email       String    @unique
+  displayName String
+  username    String
+  password    String
+  accounts    Account[]
 }
 
 enum CurrencySymbolPosition {
@@ -37,6 +39,7 @@ model RepeatPeriod {
   label         String          @unique
   value         Int             @unique
   StandingOrder StandingOrder[]
+  Average       Average[]
 }
 
 // Many-to-Many relation
@@ -60,6 +63,7 @@ model Category {
   label       String        @unique
   color       String
   Transaction Transaction[]
+  Average     Average?
 }
 
 model Transaction {
@@ -88,4 +92,15 @@ model StandingOrder {
   day               Int
   repeatValue       RepeatPeriod @relation(fields: [repeatPeriodValue], references: [value])
   repeatPeriodValue Int
+}
+
+model Average {
+  id                Int          @id @default(autoincrement())
+  title             String
+  value             Float
+  day               Int
+  repeatValue       RepeatPeriod @relation(fields: [repeatPeriodValue], references: [value])
+  repeatPeriodValue Int
+  category          Category?    @relation(fields: [categoryId], references: [id])
+  categoryId        Int?         @unique
 }

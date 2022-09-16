@@ -9,7 +9,7 @@ fieldset {
 }
 
 .form {
-  max-width: 500px;
+  // max-width: 500px;
 }
 
 .form-heading {
@@ -32,12 +32,26 @@ fieldset {
     align-items: center;
   }
 
+  &__tx-repeat {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    min-width: 200px;
+
+    & div:first-child {
+      flex-grow: 2;
+    }
+    & div:last-child {
+      max-width: 60px;
+    }
+  }
+
   &.-row {
     flex-direction: row;
 
     .btn {
       margin-bottom: 1rem;
-      align-self: end;
+      align-self: flex-end;
       justify-self: center;
     }
   }
@@ -46,6 +60,12 @@ fieldset {
 .form-label {
   font-size: 0.8rem;
   opacity: 0.7;
+
+  &.-required:after {
+    content: "*";
+    color: maroon;
+    margin-left: 3px;
+  }
 }
 
 .form-input,
@@ -146,6 +166,13 @@ fieldset {
     &.-lower {
       color: maroon;
     }
+  }
+}
+
+.form-radio {
+  &__label {
+    margin-block: 0.5rem;
+    display: inline-block;
   }
 }
 

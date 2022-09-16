@@ -1,0 +1,37 @@
+.auth {
+  &__page {
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background-color: #009baa;
+    padding: 3%;
+  }
+
+  &__form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    width: min(100%, 500px);
+  }
+
+  &__signup-info {
+    text-align: center;
+    margin-block: 0.5rem;
+  }
+
+  .form-radio__label {
+    margin-block: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    input[type="checkbox"] {
+      margin: 0;
+      margin-right: 3px;
+    }
+  }
+}

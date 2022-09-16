@@ -1,7 +1,11 @@
 import { Header } from "./Header"
 import { Sidebar } from "./Sidebar"
 
-export const Layout = ({ children }) => {
+export const Layout = ({ layout, children }) => {
+  if (layout === "MINIMAL") {
+    return <main className="main">{children}</main>
+  }
+
   return (
     <main className="main grid-root">
       <Sidebar />

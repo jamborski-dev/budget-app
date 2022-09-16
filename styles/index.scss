@@ -8,6 +8,9 @@
 @use "./components/header";
 @use "./components/content";
 
+@use "./pages/auth";
+@use "./pages/forecast";
+
 /* UTILS */
 // prettier-ignore
 .text-right { text-align: right; }

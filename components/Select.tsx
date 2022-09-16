@@ -1,5 +1,6 @@
 export const Select = ({
-  name,
+  field,
+  form,
   label = "",
   inputClass = "",
   labelClass = "",
@@ -9,28 +10,17 @@ export const Select = ({
 }) => {
   return (
     <div className={`form-group ${wrapperClass ? wrapperClass : ""}`}>
-      <label htmlFor={name} className={`form-label ${labelClass ? labelClass : ""}`}>
+      <label htmlFor={field.name} className={`form-label ${labelClass ? labelClass : ""}`}>
         {label}
       </label>
       <select
-        id={name}
-        name={name}
+        id={field.name}
         className={`form-input -select ${inputClass ? inputClass : ""}`}
+        {...field}
         {...rest}
       >
         {children}
       </select>
     </div>
-  )
-}
-
-export const TxRepeat = ({ label, name, ...rest }) => {
-  return (
-    <Select label={label} name={name} {...rest}>
-      <option value="1">every day</option>
-      <option value="7">every week</option>
-      <option value="30">every month</option>
-      <option value="365">every year</option>
-    </Select>
   )
 }

@@ -11,6 +11,7 @@ export const DataContext = createContext<IDataContext>({
     standingOrders: [],
     accounts: [],
     categories: [],
+    averages: [],
     selectedAccount: undefined
   },
   actions: {
@@ -18,6 +19,7 @@ export const DataContext = createContext<IDataContext>({
     fetchTransactions: () => {},
     fetchCategories: () => {},
     fetchStandingOrders: () => {},
+    fetchAverages: () => {},
     fetchAccounts: () => {}
   }
 })
@@ -29,6 +31,7 @@ export const DataContextProvider = ({ children }: TContextProps) => {
   const [standingOrders, setStandingOrders] = useState([])
   const [accounts, setAccounts] = useState([])
   const [categories, setCategories] = useState([])
+  const [averages, setAverages] = useState([])
   const [selectedAccount, setSelectedAccount] = useState<TAccount>()
 
   useEffect(() => {
@@ -40,6 +43,7 @@ export const DataContextProvider = ({ children }: TContextProps) => {
     fetchAccounts()
     fetchCategories()
     fetchStandingOrders()
+    fetchAverages()
 
     setLoading(false)
   }, [])
@@ -54,9 +58,13 @@ export const DataContextProvider = ({ children }: TContextProps) => {
 
   const selectAccount = (_id: number) => setSelectedAccount(accounts.find(item => item.id === _id))
 
+  // TODO: setup addAverage
+  const addAverage = () => setAverages(prev => [...prev, {}])
+
   const fetchTransactions = async () => fetchApi("/api/transactions", setTransactions, setErrors)
   const fetchAccounts = async () => fetchApi("/api/accounts", setAccounts, setErrors)
   const fetchCategories = async () => fetchApi("/api/categories", setCategories, setErrors)
+  const fetchAverages = async () => fetchApi("/api/averages", setAverages, setErrors)
   const fetchStandingOrders = async () =>
     fetchApi("/api/standing-orders", setStandingOrders, setErrors)
 
@@ -67,14 +75,17 @@ export const DataContextProvider = ({ children }: TContextProps) => {
       standingOrders,
       accounts,
       selectedAccount,
-      categories
+      categories,
+      averages
     },
     actions: {
       selectAccount,
       fetchTransactions,
       fetchAccounts,
       fetchCategories,
-      fetchStandingOrders
+      fetchStandingOrders,
+      fetchAverages,
+      addAverage
     }
   }
 

@@ -7,8 +7,10 @@ export type TCategory = {
 
 export type TUser = {
   id: number
-  name: string
   email: string
+  username: string
+  displayName: string
+  password: string
 }
 
 export type TAccount = {

@@ -16,6 +16,7 @@ export interface TDataContextState {
   accounts: Array<any>
   transactions: Array<any>
   categories: TCategory[]
+  averages: Array<any>
   standingOrders: Array<any>
   selectedAccount: TAccount
 }
@@ -26,4 +27,5 @@ export interface TDataContextActions {
   fetchAccounts: () => void
   fetchStandingOrders: () => void
   fetchCategories: () => void
+  fetchAverages: () => void
 }

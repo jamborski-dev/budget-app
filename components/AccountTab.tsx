@@ -10,6 +10,7 @@ export const AccountTab = ({ account, isActive }) => {
   const { id, color, accountHolders, bankName, currencySymbol, currentBalance } = account
   const tabColor = { "--tab-color": color } as CSSProperties
 
+  console.log(account)
   return (
     <li
       className={`account-tabs__list-item ${isActive === id ? "-active" : ""}`}
