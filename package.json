@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^18.7.9",
     "@types/react": "^18.0.17",
+    "cypress": "^10.10.0",
     "eslint": "8.21.0",
     "eslint-config-next": "12.2.3",
     "prisma": "^4.3.1",
